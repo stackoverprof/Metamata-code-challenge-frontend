@@ -28,7 +28,7 @@ const LoadScreen = () => {
             {!loaded && 
                 <motion.div css={style} initial="visible" animate={{ opacity: 0.2, transition: { duration: 1 }}} exit={{ opacity: 0, transition: { duration: 0.5 }}}>
                     <motion.div initial="visible" animate={{ opacity: 0, transition: { duration: 1 }}}>
-                        <img src="/img/RecipeBooks.svg" alt=""/>
+                        <img src="/img/recipe-books-logo.svg" alt=""/>
                     </motion.div>
                 </motion.div>
             }       

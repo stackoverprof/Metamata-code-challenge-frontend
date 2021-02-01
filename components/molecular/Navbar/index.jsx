@@ -5,7 +5,7 @@ const Navbar = () => {
 
     return (
         <nav css={style}>
-            <img src="/img/RecipeBooks.svg" alt=""/>
+            <img src="/img/recipe-books-logo.svg" alt=""/>
         </nav>
     )
 }
@@ -18,7 +18,7 @@ const style = css`
     height: 72px;
     z-index: 100;
 
-    background: #FFFFFF;
+    background: #3A3C42;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
 
     display: flex;
@@ -27,6 +27,7 @@ const style = css`
 
     img{
         height: 65%;
+        padding-top: 6px;
     }
 `
 

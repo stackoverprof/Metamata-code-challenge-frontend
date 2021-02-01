@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { css } from '@emotion/react'
 import Navbar from '../molecular/Navbar'
 
-const MainLayout = ({style, children}) => {
+const HomeLayout = ({style, children}) => {
+    const [navHeight, setNavHeight] = useState(0)
+    const navRef = useRef(null)
+
+    useEffect(() => {
+        setNavHeight(navRef.current.firstChild.offsetHeight)
+    }, [])
 
     return (
-        <div css={layer}>
+        <div css={layer({navHeight})} ref={navRef}>
             <Navbar />
             <div css={style}>
                 {children}
@@ -14,10 +20,8 @@ const MainLayout = ({style, children}) => {
     )
 }
 
-// [TODO] : ISSUE FOOTER MIN-HEIGHT NYA LAYAOUT
-const layer = css`
-    position: relative;
-    padding-top: 60px;
+const layer = ({navHeight}) => css`
+    padding-top: ${navHeight}px;
 `
 
-export default MainLayout
+export default HomeLayout
