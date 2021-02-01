@@ -1,5 +1,6 @@
 @import './componential.scss';
 @import './utilities.scss';
+@import './typefaces.scss';
 
 html,
 body {
@@ -33,4 +34,11 @@ ol, ul {
 img {
   max-width: 100%;
   height: auto;
+}
+
+button, input{
+  &:focus{
+      outline: none;
+      border: 1px white;
+  }
 }
