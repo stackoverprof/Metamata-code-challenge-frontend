@@ -20,22 +20,23 @@
 .flex{
     display: flex;
     
-    &-cc {
+    &.-cc {
         @extend .flex;
         justify-content: center;
         align-items: center;
     }
-    &-sc {
+    &.-sc {
         @extend .flex;
         justify-content: flex-start;
         align-items: center;
     }
-    &-ec {
+    &.-ec {
         @extend .flex;
         justify-content: flex-end;
         align-items: center;
     }
-}
-.d-col{
-    flex-direction: column;
+
+    &.-col{
+        flex-direction: column;
+    }
 }

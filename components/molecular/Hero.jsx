@@ -6,9 +6,9 @@ const Hero = () => {
     const screen = useResize().width
 
     return (
-        <section css={style({screen})} className="flex-cc">
-            <div className="hero-image contain-size--m flex-cc">
-                <div className="content flex-cc">
+        <section css={style({screen})} className="flex -cc">
+            <div className="hero-image contain-size--m flex -cc">
+                <div className="content flex -cc">
                     <h1>Temukan Resep Manca Negara Terbaik Disini!</h1>
                 </div>
             </div>

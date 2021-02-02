@@ -31,8 +31,9 @@ const SearchBar = () => {
             keyword = suggested
             setQuery(keyword)
         }
-        console.log(keyword)
         setQuery('')
+        
+        console.log(keyword)
     }
 
     useEffect(() => {
@@ -40,18 +41,18 @@ const SearchBar = () => {
     }, [])
     
     return (
-        <div css={style} className="flex-cc">
-            <div className="contain-size--m flex-cc">
-                <div className="inner flex-cc"> 
-                    <form onSubmit={handleSearch} className="flex-cc">
+        <section css={style} className="flex -cc">
+            <div className="contain-size--m flex -cc">
+                <div className="inner flex -cc"> 
+                    <form onSubmit={handleSearch} className="flex -cc">
                         <InputAnimated placeholder={suggestions} query={query} setQuery={setQuery}/>
-                        <div className="btn-container flex-cc">
+                        <div className="btn-container flex -cc">
                             <button className="btn-green" type="submit">Cari</button>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 
@@ -72,7 +73,7 @@ const InputAnimated = ({placeholder, query, setQuery}) => {
     return (
         <div className="animated">
             <input type="text" value={query} onChange={e => setQuery(e.target.value)} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}/>
-            <div className="placeholder flex-sc" style={{opacity: focused ? 0 : 1}}>
+            <div className="placeholder flex -sc" style={{opacity: focused ? 0 : 1}}>
                 {placeholder && !query && <TypeIt options={setting} element={'label'} id="suggested" className="noselect"/>}
             </div>
         </div>
