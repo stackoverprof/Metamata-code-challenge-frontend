@@ -1,47 +1,71 @@
 import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/react'
 import TypeIt from "typeit-react"
-
-const food = ['Pancake', 'Fried Rice', 'Spaghetti', 'Potato Wedges']
+import axios from 'axios'
 
 const SearchBar = () => {
+    const [query, setQuery] = useState('')
+    const [suggestions, setSuggestions] = useState(null)
     
-    useEffect(() => {
+    const fetchSuggestions = async () => {
+        const res = await axios.post('/api/public/recipe/menu', {
+            amount: 20
+        })
+        .catch(err => console.log(err))
+
+        const data = res.data.body
+
+        let filler = []
+        data.forEach(item => {
+            filler.push(item.title)
+        })
         
+        setSuggestions(filler)
+    }
+
+    const handleSearch = (e) => {
+        e.preventDefault()
+        console.log(query)
+        setQuery('')
+    }
+
+    useEffect(() => {
+        fetchSuggestions()
     }, [])
     
     return (
         <div css={style} className="flex-cc">
             <div className="contain-size--m flex-cc">
                 <div className="inner flex-cc"> 
-                    <div className="btn-container flex-cc">
-                        <InputAnimated placeholder={food} />
-                        <button className="btn">Cari</button>
-                    </div>
+                    <form onSubmit={handleSearch} className="flex-cc">
+                        <InputAnimated placeholder={suggestions} query={query} setQuery={setQuery}/>
+                        <button type="submit" className="btn">Cari</button>
+                    </form>
                 </div>
             </div>
         </div>
     )
 }
 
-const InputAnimated = ({placeholder}) => {
+const InputAnimated = ({placeholder, query, setQuery}) => {
     const [focused, setFocused] = useState(false)
     
     const setting = {
         strings: placeholder,
-        speed: 150,
+        speed: 100,
+        deleteSpeed: 10,
         waitUntilVisible: true,
         startDelay: 4000,
         nextStringDelay: 4000,
         breakLines: false,
         loop: true
     }
-
+    
     return (
         <div className="animated">
-            <input type="text" onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}/>
-            <div className="placeholder flex-cc" style={{opacity: focused ? 0 : 1}}>
-                <TypeIt options={setting} element={'label'} className="noselect"/>
+            <input type="text" value={query} onChange={e => setQuery(e.target.value)} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}/>
+            <div className="placeholder flex-sc" style={{opacity: focused ? 0 : 1}}>
+                {placeholder && !query && <TypeIt options={setting} element={'label'} className="noselect"/>}
             </div>
         </div>
     )
@@ -52,6 +76,7 @@ const style = css`
     margin: 24px;
 
     .animated{
+        width: 100%;
         position: relative;
         background: #FFFFFF;
         border: 1px solid #9CCD62;
@@ -61,12 +86,16 @@ const style = css`
         overflow: hidden;
 
         .placeholder{
+            min-width: 100%;
             height: 40px;
             position: absolute;
             top: -2px;
+            right: 0;
             pointer-events: none;
             padding: 0 20px;
             color: gray;
+            white-space: nowrap;
+            text-align: left;
         }
     }
 
@@ -76,13 +105,14 @@ const style = css`
     }
     
     input{
-        padding: 0 20px;
+        padding: 12px 20px;
         height: 40px;
         width: 100%;
         border: none;
     }
 
-    .btn-container{
+    form{
+        width: 100%;
         height: 40px;
         margin: 6px;
         transition: all 0.25s, background 0.1s;

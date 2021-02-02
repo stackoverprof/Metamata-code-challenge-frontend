@@ -17,10 +17,24 @@
     }
 }
 
-.flex-cc{
+.flex{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    
+    &-cc {
+        @extend .flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &-sc {
+        @extend .flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    &-ec {
+        @extend .flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
 }
 .d-col{
     flex-direction: column;
