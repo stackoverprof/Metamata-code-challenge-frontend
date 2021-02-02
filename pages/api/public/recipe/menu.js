@@ -1,10 +1,10 @@
-// import axios from 'axios'
-// import apiKey from '@core/services/spoonacular'
+import axios from 'axios'
+import apiKey from '@core/services/spoonacular'
 
 export default async (req, res) => {
-    // const { amount = 1 } = req.body
+    const { amount = 1 } = req.body
 
-    const { data = fallbackData } = fallbackData // await axios.get(`https://api.spoonacular.com/recipes/findByNutrients?maxFat=100&random=true&number=${amount}&apiKey=${apiKey}`)
+    const { data = fallbackData } = await axios.get(`https://api.spoonacular.com/recipes/findByNutrients?maxFat=100&random=true&number=${amount}&apiKey=${apiKey}`)
     
     data.forEach(item => {
         delete item.imageType
@@ -14,6 +14,7 @@ export default async (req, res) => {
         delete item.carbs
     })
 
+    console.log('fetched');
 
     res.status(200).json({status: 'OK', body: data})
 }

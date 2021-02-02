@@ -1,14 +1,9 @@
 import React from 'react'
 import { css } from '@emotion/react'
-import useSWR from 'swr'
-import axios from 'axios'
 import RecipeCard from '@components/atomic/RecipeCard'
 import AlertHandler from '@components/atomic/AlertHandler'
 
-const Etalase = () => {
-    const { data, error } = useSWR('/api/public/recipe/menu', url => axios.post(url, {
-        amount: 20
-    }).then(res => res.data))
+const Etalase = ({data, error}) => {
 
     return (
         <section css={style} className="flex -cc -col">
