@@ -39,7 +39,9 @@ const SearchBar = () => {
                 <div className="inner flex-cc"> 
                     <form onSubmit={handleSearch} className="flex-cc">
                         <InputAnimated placeholder={suggestions} query={query} setQuery={setQuery}/>
-                        <button type="submit" className="btn">Cari</button>
+                        <div className="btn-container flex-cc">
+                            <button type="submit" className="btn">Cari</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -60,7 +62,7 @@ const InputAnimated = ({placeholder, query, setQuery}) => {
         breakLines: false,
         loop: true
     }
-    
+
     return (
         <div className="animated">
             <input type="text" value={query} onChange={e => setQuery(e.target.value)} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}/>
@@ -96,6 +98,11 @@ const style = css`
             color: gray;
             white-space: nowrap;
             text-align: left;
+
+            @media (max-width: 580px) {
+                min-width: calc(100% - 74px);
+                right: 74px;
+            }
         }
     }
 
@@ -109,6 +116,10 @@ const style = css`
         height: 40px;
         width: 100%;
         border: none;
+        
+        @media (max-width: 580px) {
+            padding-right: 94px;
+        }
     }
 
     form{
@@ -118,7 +129,7 @@ const style = css`
         transition: all 0.25s, background 0.1s;
 
         @media (max-width: 580px) {
-            position: absolute;
+            position: relative;
             top: 0;
             right: 0;
             height: 40px;
@@ -128,12 +139,23 @@ const style = css`
         height: 100%;
         padding: 0 40px;
         transition: all 0.25s, background 0.1s;
-
+        margin: 0;
+        
         @media (max-width: 580px) {
             height: 72%;
             padding: 0 24px;
             margin-right: 6px;
             font-size: 16px;
+        }
+    }
+    
+    .btn-container{
+        margin:  0 6px;
+        height: 100%;
+        @media (max-width: 580px) {
+            position: absolute;
+            top: 0;
+            right: 0;
         }
     }
 `

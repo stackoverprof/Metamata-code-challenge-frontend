@@ -1,11 +1,11 @@
 // import axios from 'axios'
+// import apiKey from '../../../../core/services/spoonacular'
 
 export default async (req, res) => {
     // const { amount = 1 } = req.body
 
-    // const { data } = await axios.get(`https://api.spoonacular.com/recipes/findByNutrients?maxFat=100&random=true&number=${amount}&apiKey=df21e0633825409383896a5a8b2d5aed`)
+    const { data = fallbackData } = fallbackData // await axios.get(`https://api.spoonacular.com/recipes/findByNutrients?maxFat=100&random=true&number=${amount}&apiKey=${apiKey}`)
     
-
     data.forEach(item => {
         delete item.imageType
         delete item.calories
@@ -18,7 +18,7 @@ export default async (req, res) => {
     res.status(200).json({status: 'OK', body: data})
 }
 
-const data = [
+const fallbackData = [
     {
       id: 635391,
       title: 'Blue Sugar Plum Cake',
