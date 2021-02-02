@@ -1,5 +1,5 @@
 // import axios from 'axios'
-// import apiKey from '../../../../core/services/spoonacular'
+// import apiKey from '@core/services/spoonacular'
 
 export default async (req, res) => {
     // const { amount = 1 } = req.body

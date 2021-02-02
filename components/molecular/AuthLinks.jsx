@@ -1,8 +1,8 @@
 import React from 'react'
 import { css } from '@emotion/react'
 import Link from 'next/link'
-import to from '../../core/routepath'
-import { useAuth } from '../../core/contexts/AuthContext'
+import to from '@core/routepath'
+import { useAuth } from '@core/contexts/AuthContext'
 
 const AuthLinks = () => {
     const { authState } = useAuth()

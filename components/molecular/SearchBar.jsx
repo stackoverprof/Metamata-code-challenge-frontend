@@ -25,7 +25,13 @@ const SearchBar = () => {
 
     const handleSearch = (e) => {
         e.preventDefault()
-        console.log(query)
+        let keyword = query
+        if (!query) {
+            const suggested = document.getElementById('suggested').innerHTML.split('<')[0]
+            keyword = suggested
+            setQuery(keyword)
+        }
+        console.log(keyword)
         setQuery('')
     }
 
@@ -65,9 +71,9 @@ const InputAnimated = ({placeholder, query, setQuery}) => {
 
     return (
         <div className="animated">
-            <input type="text" required value={query} onChange={e => setQuery(e.target.value)} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}/>
+            <input type="text" value={query} onChange={e => setQuery(e.target.value)} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}/>
             <div className="placeholder flex-sc" style={{opacity: focused ? 0 : 1}}>
-                {placeholder && !query && <TypeIt options={setting} element={'label'} className="noselect"/>}
+                {placeholder && !query && <TypeIt options={setting} element={'label'} id="suggested" className="noselect"/>}
             </div>
         </div>
     )
