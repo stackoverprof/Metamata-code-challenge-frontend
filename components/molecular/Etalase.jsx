@@ -23,7 +23,7 @@ const Etalase = () => {
                     {!data && <p>Loading...</p>}
                 </div>
             </div>
-            <AlertHandler message={error} color="red" />
+            <AlertHandler message={error} color="red"/>
         </section>
     )
 }
@@ -44,6 +44,7 @@ const style = css`
         text-align: center;
         
         color: #9CCD62;
+        margin: 24px;
     }
 `
 
