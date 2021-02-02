@@ -40,7 +40,7 @@ const SearchBar = () => {
                     <form onSubmit={handleSearch} className="flex-cc">
                         <InputAnimated placeholder={suggestions} query={query} setQuery={setQuery}/>
                         <div className="btn-container flex-cc">
-                            <button type="submit" className="btn">Cari</button>
+                            <button className="btn-green" type="submit">Cari</button>
                         </div>
                     </form>
                 </div>
@@ -65,7 +65,7 @@ const InputAnimated = ({placeholder, query, setQuery}) => {
 
     return (
         <div className="animated">
-            <input type="text" value={query} onChange={e => setQuery(e.target.value)} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}/>
+            <input type="text" required value={query} onChange={e => setQuery(e.target.value)} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}/>
             <div className="placeholder flex-sc" style={{opacity: focused ? 0 : 1}}>
                 {placeholder && !query && <TypeIt options={setting} element={'label'} className="noselect"/>}
             </div>

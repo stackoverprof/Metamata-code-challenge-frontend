@@ -8,7 +8,7 @@ const error404 = () => {
     return (
         <div css={style}>
             <h1>404 | Not Found</h1>
-            <Link href={to.home}><button>BACK HOME</button></Link>
+            <Link href={to.home}><button className="btn">BACK HOME</button></Link>
         </div>
     )
 }

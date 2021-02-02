@@ -1,11 +1,15 @@
 import React from 'react'
 import { css } from '@emotion/react'
+import Link from 'next/link'
+import to from '../../../core/routepath'
 
 const Navbar = () => {
 
     return (
         <nav css={style}>
-            <img src="/img/recipe-books-logo.svg" alt=""/>
+            <Link href={to.home}>
+                <img src="/img/recipe-books-logo.svg" alt=""/>
+            </Link>
         </nav>
     )
 }

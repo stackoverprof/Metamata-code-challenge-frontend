@@ -52,7 +52,7 @@ const Register = () => {
                         <label htmlFor="re-password">ULANGI PASSWORD</label>
                         <input type="password" onChange={(e) => setRetypePassword(e.target.value)} value={retypePassword} required id="re-password" placeholder="Masukan Ulang Password"/>
                     </div>
-                    <button type="submit">REGISTER</button>
+                    <button className="btn" type="submit">REGISTER</button>
                 </form>
 
                 <GoogleAuth />
@@ -67,20 +67,21 @@ const Register = () => {
     )
 }
 const style = css`
-    position: fixed;
+    position: relative;
     width: 100%;
     min-height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 54px 0;
 
     form{
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        margin-bottom: 102px;
+        margin-bottom: 32px;
         
         div{
             width: 100%;

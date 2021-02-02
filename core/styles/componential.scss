@@ -1,6 +1,6 @@
 .btn{
     padding: 12px 40px;
-    background: #9CCD62;
+    background: #3A3C42;
     border-radius: 100px;
 
     font-family: Roboto;
@@ -8,10 +8,19 @@
     color: #FFFFFF;
     border: 0;
     transition: background 0.1s;
-    margin: 4px;
+    margin: 8px;
 
     &:hover{
-        background: #729c3d;
+        background: #171818;
+    }
+    
+    &-green {
+        @extend .btn;
+        background: #9CCD62;
+        
+        &:hover{
+            background: #729c3d;
+        }
     }
     
 }

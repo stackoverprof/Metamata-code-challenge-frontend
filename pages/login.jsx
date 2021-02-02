@@ -38,7 +38,7 @@ const Login = () => {
                         <label htmlFor="email">PASSWORD</label>
                         <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} required id="password" placeholder="Masukan Password"/>
                     </div>
-                    <button type="submit">LOGIN</button>
+                    <button className="btn" type="submit">LOGIN</button>
                 </form>
                 
                 <GoogleAuth />
@@ -54,13 +54,14 @@ const Login = () => {
 }
 
 const style = css`
-    position: fixed;
+    position: relative;
     width: 100%;
     min-height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 54px 0;
 
     form{
         display: flex;

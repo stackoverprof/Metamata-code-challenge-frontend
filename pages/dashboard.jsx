@@ -11,17 +11,19 @@ import Spinner from '../components/atomic/spinner/Circle'
     
 const Dashboard = () => {
     const { currentUser, role, authMethods } = useAuth()
-    const [data, setData] = useState('')
+    const [alert, setAlert] = useState('')
+    const [issuedEmail, setIssuedEmail] = useState('')
 
-    const CheckRole = async () => {
-        setData(null)
+    const handleSetAdmin = async (e) => {
+        e.preventDefault()
+        setAlert(null)
         
         axios.post('/api/private/admin/set', {
             userToken: await currentUser.getIdToken(),
-            email: 'rbintang.bagus11@gmail.com'
+            email: issuedEmail
         })
-        .then(res => setData(res.data.message))
-        .catch(err => setData(err.response.data.message))
+        .then(res => setAlert(res.data.message))
+        .catch(err => setAlert(err.response.data.message))
     }
 
     return (
@@ -31,12 +33,17 @@ const Dashboard = () => {
                     <p>Dashboard of {currentUser.displayName}</p>
                     <div>
                         <img src={currentUser.photoURL} alt=""/>
-                        <Link href={to.home}><button>BACK HOME</button></Link>
-                        <button onClick={CheckRole}>{data === null ? <Spinner /> : 'set admin'}</button>
-                        <button onClick={authMethods.handleSignout} className="red">LOGOUT</button>
+                        <Link href={to.home}><button className="btn">Back Home</button></Link>
+                        <button className="btn red" onClick={authMethods.handleSignout}>LOGOUT</button>
                     </div>
                     <p>Admin Status : {role.admin ? 'admin' : 'false'}</p>
-                    <p>{data}</p>
+                    {role.admin && (
+                        <form onSubmit={handleSetAdmin}>
+                            <input type="email" value={issuedEmail} required onChange={e => setIssuedEmail(e.target.value)}/>
+                            <button className="btn" type="submit">{alert === null ? <Spinner /> : 'set admin'}</button>
+                        </form>
+                    )}
+                    {alert && <p className="alert-box">{alert}</p>}
                 </MainLayout>
             )}
         </UserOnlyRoute>
@@ -47,6 +54,15 @@ const style = css`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    .alert-box{
+        position: fixed;
+        bottom: 32px;
+        padding: 12px 32px;
+        background: #0006;
+        border-radius: 4px;
+        color: white;
+    }
     
     div{
         display: flex;
@@ -58,6 +74,14 @@ const style = css`
 
         margin-top: 54px;
         text-align: center;
+    }
+
+    img{
+        margin: 24px;
+    }
+
+    input{
+        border: 1px solid #000;
     }
 `
     

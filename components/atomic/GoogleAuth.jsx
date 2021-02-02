@@ -10,7 +10,7 @@ const GoogleButton = () => {
     }
 
     return (
-        <button onClick={handleGoogleAuth}>
+        <button className="button" onClick={handleGoogleAuth}>
             <img className="icon" src="/img/icons/google.svg" alt=""/>
             Sign in with Google
         </button>

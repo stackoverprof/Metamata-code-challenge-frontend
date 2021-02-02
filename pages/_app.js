@@ -14,7 +14,7 @@ const App = ({ Component, pageProps }) => {
         <meta name="theme-color" content="#060410"/>
     </Head>
     <LoadScreen />
-    <ProgressBar color="black" startPosition={0.3} stopDelayMs={200} height="3" options={{showSpinner: false}}/>
+    <ProgressBar color="#9CCD62" startPosition={0.3} stopDelayMs={200} height="3" options={{showSpinner: false}}/>
     <AuthProvider>
       <Component {...pageProps} />
     </AuthProvider>
