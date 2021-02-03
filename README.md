@@ -21,6 +21,15 @@ npm run dev
 ![](https://img.shields.io/badge/FIREBASE%20-%23FFA611.svg?&style=flat&logo=firebase&logoColor=white) 
 ![](https://img.shields.io/badge/NODE%20-%233C873A.svg?&style=flat&logo=node.js&logoColor=white)
 
+## Fitur
+- Sudah consume api spoonacular jadi bukan dummy data
+- Bisa searching resep apapun, di dukung oleh searching api spoonacular
+- bisa di klik untuk menambahkan data pada localstorage
+- hasil resep2 yang disimpan ditampilkan pada /saved
+- ada fitur login menggunakan firebase auth
+- ada fitur admin menggunakan firebase customclaims
+- set admin baru
+- dan sebagainya
 
 ## Spesifikasi
 - Membuat tampilan sesuai contoh desain
