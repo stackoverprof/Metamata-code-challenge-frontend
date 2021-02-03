@@ -9,8 +9,6 @@ export default async (req, res) => {
     const { data } = await axios.get(apiUrl)
       .catch(() => res.status(500).json({status: 'OK', message: 'Spoonacular api error'}))
 
-    console.log(data)
-
     console.log(`searched : ${keyword}`)
 
     res.status(200).json({status: 'OK', body: data})

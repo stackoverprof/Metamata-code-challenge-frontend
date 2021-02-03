@@ -34,7 +34,6 @@ const RecipeCard = ({data}) => {
             fullDataSave()
             setSaved(true)
         } else {
-            console.log('dah kesimpen dulu');
             setError('This item has already been saved')
         }
     }
