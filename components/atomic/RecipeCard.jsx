@@ -19,7 +19,7 @@ const RecipeCard = ({data}) => {
     const isAlreadySaved = (id) => {
         if (!Array.isArray(parser(localStorage.getItem('savedRecipes')))) {
             localStorage.setItem('savedRecipes', stringify([]))
-            return false
+            return false 
         }
         const fetch = parser(localStorage.getItem('savedRecipes'))
         return fetch.includes(id)

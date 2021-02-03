@@ -15,6 +15,7 @@ const Etalase = ({header, data}) => {
                         <RecipeCard key={item.id} data={item}/>
                     ))}
                     {!data && <p>Loading...</p>}
+                    {data && data.length === 0 && <p>Belum ada resep tersimpan</p>}
                 </div>
             </div>
         </section>

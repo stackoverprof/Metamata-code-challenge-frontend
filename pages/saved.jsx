@@ -14,7 +14,12 @@ const Home = () => {
 
 
     useEffect(() => {
-        setMenuData(JSON.parse(localStorage.getItem('fullDataSave')))
+        if (!Array.isArray(JSON.parse(localStorage.getItem('fullDataSave')))) {
+            localStorage.setItem('fullDataSave', JSON.stringify([]))
+            setMenuData([])
+        } else {
+            setMenuData(JSON.parse(localStorage.getItem('fullDataSave')))
+        }
     }, [])
 
     return (
