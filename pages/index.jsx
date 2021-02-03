@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/react'
 import useResize from 'use-resizing'
-import useSWR from 'swr'
 import axios from 'axios'
 
 import HomeLayout from '@components/layouts/HomeLayout'
@@ -11,17 +10,23 @@ import AuthLinks from '@components/molecular/AuthLinks'
 import Etalase from '@components/molecular/Etalase'
 
 const Home = () => {
+    const [menuData, setMenuData] = useState(null)
+    const [error, setError] = useState('')
     const screen = useResize().width
 
-    const { data, error } = useSWR('/api/public/recipe/menu', url => axios.post(url, {
-        amount: 12
-    }, { isPaused: true }).then(res => res.data))
+    const fetchMenu = () => {
+        axios.post('/api/public/recipe/menu', { amount: 12 })
+        .then(res => setMenuData(res.data))
+        .catch(err => setError(err.response.data.message))
+    }
+
+    useEffect(fetchMenu, [])
 
     return (
         <HomeLayout style={style({screen})} className="flex -cc -col">
             <Hero />
             <SearchBar />
-            <Etalase data={data} error={error}/>
+            <Etalase data={menuData} error={error}/>
             <AuthLinks />
         </HomeLayout>
     )

@@ -11,7 +11,7 @@ const Etalase = ({data, error}) => {
             <div className="contain-size--m">
                 <div className="gridder">
                     {data?.body.map((item) => (
-                        <RecipeCard key={item.id} title={item.title} imageURL={item.image}/>
+                        <RecipeCard key={item.id} data={item}/>
                     ))}
                     {!data && <p>Loading...</p>}
                 </div>

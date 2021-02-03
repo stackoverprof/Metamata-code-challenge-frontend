@@ -9,7 +9,7 @@ const SearchBar = () => {
     
     const fetchSuggestions = async () => {
         const res = await axios.post('/api/public/recipe/menu', {
-            amount: 20
+            amount: 12
         })
         .catch(err => console.log(err))
 

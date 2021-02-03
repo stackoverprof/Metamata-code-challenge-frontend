@@ -1,20 +1,55 @@
 import React, { useRef, useState } from 'react'
 import { css } from '@emotion/react'
 
-const RecipeCard = ({title, imageURL}) => {
+const RecipeCard = ({data}) => {
     const [mover, setMover] = useState(false)
     const child = useRef(null)
     const parent = useRef(null)
 
+    const stringify = (array) => {
+        return JSON.stringify(array)
+    }
+    const parse = (str) => {
+        return JSON.parse(str)
+    }
+    
+    const isAlreadySaved = (id) => {
+        if (localStorage.getItem('rememberMe') == null) {
+            return false
+        }
+        const fetch = parse(localStorage.getItem('savedRecipes'))
+
+        return fetch.includes(id)
+    }
+
+    const handleFavorite = () => {
+        // if (!isAlreadySaved(data.id)){
+            
+        //     const fetch = localStorage.getItem('savedRecipes')
+        //     const update = [...fetch, data.id]
+        //     localStorage.setItem('savedRecipes', stringify(update))
+        // } else {
+        //     console.log('already saved')
+        // }
+        localStorage.setItem('savedRecipes', stringify([12378,18888]))
+    }
+
+    const imagePlaceholder = (e) =>{
+        e.target.onerror = null
+        e.target.src = '/img/fallback-image.svg'
+    }
+
     return (
         <div css={style({mover, child, parent})} onMouseOver={() => setMover(true)} onMouseLeave={() => setMover(false)}>
-            <img src={imageURL} alt=""/>
+            <div className="image">
+                <img src={data.image} onError={imagePlaceholder} alt=""/>
+            </div>
             <div className="content">
                 <div className="title flex -sc" ref={parent}>
-                    <p className="flex -cc" ref={child}>{title}</p>
+                    <p className="flex -cc" ref={child}>{data.title}</p>
                 </div>
                 <div className="btn-container flex -cc">
-                    <button className="btn-green">favorit</button>
+                    <button onClick={handleFavorite} className="btn-green">favorit</button>
                 </div>
             </div>
         </div>
@@ -47,7 +82,7 @@ const style = ({mover, child, parent}) => css`
         
         .btn-container{
             position: absolute;
-            top: -2px;
+            top: 0;
             right: 0;
             height: 100%;
             padding: 0 12px 0 8px;
@@ -80,16 +115,24 @@ const style = ({mover, child, parent}) => css`
             }
         }
 
-        img{
-            margin: 0;
-        }
     }
 
-    img{
+    div.image{
+        margin: 0;
+        background: url('/img/fallback-image.svg'), #fffa;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
         border-radius: 8px;
         height: 150px;
         width: 100%;
-        object-fit: cover;
+        overflow:hidden;
+        
+        img{
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
     }
 `
 

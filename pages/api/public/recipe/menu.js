@@ -3,9 +3,11 @@ import apiKey from '@core/services/spoonacular'
 
 export default async (req, res) => {
     const { amount = 1 } = req.body
+    console.log('data')
 
-    const { data = fallbackData } = await axios.get(`https://api.spoonacular.com/recipes/findByNutrients?maxFat=100&random=true&number=${amount}&apiKey=${apiKey}`)
-    
+    const { data } = await axios.get(`https://api.spoonacular.com/recipes/findByNutrients?maxFat=100&random=true&number=${amount}&apiKey=${apiKey}`)
+      .catch(() => res.status(200).json({status: 'OK', body: fallbackData}))
+
     data.forEach(item => {
         delete item.imageType
         delete item.calories
@@ -14,110 +16,110 @@ export default async (req, res) => {
         delete item.carbs
     })
 
-    console.log('fetched');
+    console.log(`fetched ${amount} spoonacular random menu`)
 
     res.status(200).json({status: 'OK', body: data})
 }
 
 const fallbackData = [
-    {
-      id: 635391,
-      title: 'Blue Sugar Plum Cake',
-      image: 'https://spoonacular.com/recipeImages/635391-312x231.jpg'
-    },
-    {
-      id: 157089,
-      title: '5 Ingredient High Protein Pumpkin Pancakes',
-      image: 'https://spoonacular.com/recipeImages/157089-312x231.jpg'
-    },
-    {
-      id: 632356,
-      title: 'Ang Chow Chicken Soup With Preserved Mustard Greens',
-      image: 'https://spoonacular.com/recipeImages/632356-312x231.jpg'
-    },
-    {
-      id: 637658,
-      title: 'Cheesy Ham and Shrimp Macaroni Au Gratin',
-      image: 'https://spoonacular.com/recipeImages/637658-312x231.jpg'
-    },
-    {
-      id: 638174,
-      title: 'Chicken Lo Mein',
-      image: 'https://spoonacular.com/recipeImages/638174-312x231.jpg'
-    },
-    {
-      id: 639615,
-      title: 'Classic Martini',
-      image: 'https://spoonacular.com/recipeImages/639615-312x231.jpg'
-    },
-    {
-      id: 639715,
-      title: 'Coconut Almond Macaroons',
-      image: 'https://spoonacular.com/recipeImages/639715-312x231.jpg'
-    },
-    {
-      id: 640591,
-      title: 'Creamy aubergine and cannellini soup',
-      image: 'https://spoonacular.com/recipeImages/640591-312x231.jpg'
-    },
-    {
-      id: 642606,
-      title: 'Farro With Porcini, Chanterelles & Mascarpone',
-      image: 'https://spoonacular.com/recipeImages/642606-312x231.jpg'
-    },
-    {
-      id: 643634,
-      title: 'Macaroni with Fresh Tomatoes and Beans',
-      image: 'https://spoonacular.com/recipeImages/643634-312x231.jpg'
-    },
-    {
-      id: 645265,
-      title: 'Great Greek Salad',
-      image: 'https://spoonacular.com/recipeImages/645265-312x231.jpg'
-    },
-    {
-      id: 650939,
-      title: 'Maple-Glazed Apple Cookies',
-      image: 'https://spoonacular.com/recipeImages/650939-312x231.jpg'
-    },
-    {
-      id: 655822,
-      title: 'Pesto Fresh Caprese Sandwich',
-      image: 'https://spoonacular.com/recipeImages/655822-312x231.jpg'
-    },
-    {
-      id: 662376,
-      title: 'Superbowl Chili',
-      image: 'https://spoonacular.com/recipeImages/662376-312x231.jpg'
-    },
-    {
-      id: 662744,
-      title: 'Taco Egg Roll',
-      image: 'https://spoonacular.com/recipeImages/662744-312x231.jpg'
-    },
-    {
-      id: 665379,
-      title: 'Winter Kimchi',
-      image: 'https://spoonacular.com/recipeImages/665379-312x231.jpg'
-    },
-    {
-      id: 982371,
-      title: 'Instant Pot Quinoa Grain Bowl',
-      image: 'https://spoonacular.com/recipeImages/982371-312x231.jpg'
-    },
-    {
-      id: 1095800,
-      title: 'Warm cream of cucumber soup',
-      image: 'https://spoonacular.com/recipeImages/1095800-312x231.jpg'
-    },
-    {
-      id: 1449043,
-      title: 'Easy Magic Cookie Bars',
-      image: 'https://spoonacular.com/recipeImages/1449043-312x231.jpg'
-    },
-    {
-      id: 1504227,
-      title: 'Easy Italian Meatballs',
-      image: 'https://spoonacular.com/recipeImages/1504227-312x231.jpg'
-    }
+  {
+    id: 157344,
+    title: 'Spicy Salad with Kidney Beans, Cheddar, and Nuts',
+    image: 'https://spoonacular.com/recipeImages/157344-312x231.jpg'
+  },
+  {
+    id: 632015,
+    title: 'Agave Glazed Carrots',
+    image: 'https://spoonacular.com/recipeImages/632015-312x231.jpg'
+  },
+  {
+    id: 636675,
+    title: 'Cacao-Pecan Shortbread Cookies',
+    image: 'https://spoonacular.com/recipeImages/636675-312x231.jpg'
+  },
+  {
+    id: 637348,
+    title: 'Celery Apple Risotto With Crispy Pancetta',
+    image: 'https://spoonacular.com/recipeImages/637348-312x231.jpg'
+  },
+  {
+    id: 640624,
+    title: 'Creamy Choco-Pumpkin Bars',
+    image: 'https://spoonacular.com/recipeImages/640624-312x231.jpg'
+  },
+  {
+    id: 641893,
+    title: 'Easy Cheesy Pizza Casserole',
+    image: 'https://spoonacular.com/recipeImages/641893-312x231.jpg'
+  },
+  {
+    id: 642272,
+    title: 'Eggplant & Artichoke Heart Galettes',
+    image: 'https://spoonacular.com/recipeImages/642272-312x231.jpg'
+  },
+  {
+    id: 643153,
+    title: 'Fluffy Spelt Pancakes',
+    image: 'https://spoonacular.com/recipeImages/643153-312x231.jpg'
+  },
+  {
+    id: 645742,
+    title: 'Grilled Kabobs',
+    image: 'https://spoonacular.com/recipeImages/645742-312x231.jpg'
+  },
+  {
+    id: 646425,
+    title: 'Healthier Pork Fried Rice',
+    image: 'https://spoonacular.com/recipeImages/646425-312x231.jpg'
+  },
+  {
+    id: 648408,
+    title: 'Jamaican Jerk Rub And Seasoning',
+    image: 'https://spoonacular.com/recipeImages/648408-312x231.jpg'
+  },
+  {
+    id: 649129,
+    title: 'Kung Pao Chicken With Peanuts',
+    image: 'https://spoonacular.com/recipeImages/649129-312x231.jpg'
+  },
+  {
+    id: 652672,
+    title: 'Mushroom Gnocchi',
+    image: 'https://spoonacular.com/recipeImages/652672-312x231.jpg'
+  },
+  {
+    id: 653165,
+    title: 'No Mayonnaise Cole Slaw',
+    image: 'https://spoonacular.com/recipeImages/653165-312x231.jpg'
+  },
+  {
+    id: 655269,
+    title: 'Peanut Butter Chocolate Cream Pie',
+    image: 'https://spoonacular.com/recipeImages/655269-312x231.jpg'
+  },
+  {
+    id: 655726,
+    title: 'Perfect Chicken Soup',
+    image: 'https://spoonacular.com/recipeImages/655726-312x231.jpg'
+  },
+  {
+    id: 660926,
+    title: 'Spice-Rubbed Lemon Barbecue Salmon',
+    image: 'https://spoonacular.com/recipeImages/660926-312x231.jpg'
+  },
+  {
+    id: 664144,
+    title: 'Tuscan Style Bread Salad',
+    image: 'https://spoonacular.com/recipeImages/664144-312x231.jpg'
+  },
+  {
+    id: 665767,
+    title: 'Zucchini Pineapple Muffins',
+    image: 'https://spoonacular.com/recipeImages/665767-312x231.jpg'
+  },
+  {
+    id: 1157763,
+    title: 'New Years Eve Countdown Cookies',
+    image: 'https://spoonacular.com/recipeImages/1157763-312x231.jpg'
+  }
 ]
