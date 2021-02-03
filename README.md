@@ -11,9 +11,6 @@ atau
 cara run : 
 install nodejs
 
-letakan file .env.local di root folder /
-(kontak saya untuk meminta file .env.local tersebut karena rahasia)
-
 lalu jalankan command
 ```
 npm i
