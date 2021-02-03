@@ -25,6 +25,7 @@ npm run dev
 - Sudah consume api spoonacular jadi bukan dummy data
 - Bisa searching resep apapun, di dukung oleh searching api spoonacular
 - bisa di klik untuk menambahkan data pada localstorage
+- pada intput ada fitur suggesti pencarian yang sangat interaktif
 - hasil resep2 yang disimpan ditampilkan pada /saved
 - ada fitur login menggunakan firebase auth
 - ada fitur admin menggunakan firebase customclaims
