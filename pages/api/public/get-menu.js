@@ -3,9 +3,10 @@ import apiKey from '@core/services/spoonacular'
 
 export default async (req, res) => {
     const { amount = 1 } = req.body
-    console.log('data')
 
-    const { data } = await axios.get(`https://api.spoonacular.com/recipes/findByNutrients?maxFat=100&random=true&number=${amount}&apiKey=${apiKey}`)
+    const apiUrl = `https://api.spoonacular.com/recipes/findByNutrients?maxFat=100&random=true&number=${amount}&apiKey=${apiKey}`
+
+    const { data } = await axios.get(apiUrl)
       .catch(() => res.status(200).json({status: 'OK', body: fallbackData}))
 
     data.forEach(item => {

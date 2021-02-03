@@ -11,12 +11,13 @@ import Etalase from '@components/molecular/Etalase'
 
 const Home = () => {
     const [menuData, setMenuData] = useState(null)
+    // const [state, setstate] = useState(initialState)
     const [error, setError] = useState('')
     const screen = useResize().width
 
     const fetchMenu = () => {
-        axios.post('/api/public/recipe/menu', { amount: 12 })
-        .then(res => setMenuData(res.data))
+        axios.post('/api/public/get-menu', { amount: 12 })
+        .then(res => setMenuData(res.data.body))
         .catch(err => setError(err.response.data.message))
     }
 
@@ -25,9 +26,11 @@ const Home = () => {
     return (
         <HomeLayout style={style({screen})} className="flex -cc -col">
             <Hero />
-            <SearchBar />
+            <SearchBar setMenuData={setMenuData} setError={setError}/>
             <Etalase data={menuData} error={error}/>
             <AuthLinks />
+
+            { error && <AlertHandler message={error} closeHandler={() => setError('')} color="red"/>}
         </HomeLayout>
     )
 }

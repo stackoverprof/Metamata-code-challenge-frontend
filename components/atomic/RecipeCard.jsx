@@ -1,37 +1,50 @@
 import React, { useRef, useState } from 'react'
 import { css } from '@emotion/react'
+import AlertHandler from '@components/atomic/AlertHandler'
 
 const RecipeCard = ({data}) => {
     const [mover, setMover] = useState(false)
+    const [error, setError] = useState('')
     const child = useRef(null)
     const parent = useRef(null)
 
     const stringify = (array) => {
         return JSON.stringify(array)
     }
-    const parse = (str) => {
+    const parser = (str) => {
         return JSON.parse(str)
     }
     
     const isAlreadySaved = (id) => {
-        if (localStorage.getItem('rememberMe') == null) {
+        if (!Array.isArray(parser(localStorage.getItem('savedRecipes')))) {
+            localStorage.setItem('savedRecipes', stringify([]))
             return false
         }
-        const fetch = parse(localStorage.getItem('savedRecipes'))
-
+        const fetch = parser(localStorage.getItem('savedRecipes'))
         return fetch.includes(id)
     }
 
     const handleFavorite = () => {
-        // if (!isAlreadySaved(data.id)){
-            
-        //     const fetch = localStorage.getItem('savedRecipes')
-        //     const update = [...fetch, data.id]
-        //     localStorage.setItem('savedRecipes', stringify(update))
-        // } else {
-        //     console.log('already saved')
-        // }
-        localStorage.setItem('savedRecipes', stringify([12378,18888]))
+        if (!isAlreadySaved(data.id)){
+            let fetch = parser(localStorage.getItem('savedRecipes'))
+                fetch.unshift(data.id)
+                localStorage.setItem('savedRecipes', stringify(fetch))
+
+            fullDataSave()
+        } else {
+            console.log('dah kesimpen dulu');
+            setError('This item has already been saved')
+        }
+    }
+
+    const fullDataSave = () => {
+        if (!Array.isArray(parser(localStorage.getItem('fullDataSave')))) {
+            localStorage.setItem('fullDataSave', stringify([]))
+        }
+
+        let fetch = parser(localStorage.getItem('fullDataSave'))
+            fetch.unshift(data)
+            localStorage.setItem('fullDataSave', stringify(fetch))
     }
 
     const imagePlaceholder = (e) =>{
@@ -52,6 +65,7 @@ const RecipeCard = ({data}) => {
                     <button onClick={handleFavorite} className="btn-green">favorit</button>
                 </div>
             </div>
+            { error && <AlertHandler message={error} closeHandler={() => setError('')} color="red"/>}
         </div>
     )
 }

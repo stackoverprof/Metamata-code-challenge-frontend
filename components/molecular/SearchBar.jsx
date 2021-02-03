@@ -3,12 +3,12 @@ import { css } from '@emotion/react'
 import TypeIt from "typeit-react"
 import axios from 'axios'
 
-const SearchBar = () => {
+const SearchBar = ({setMenuData, setError}) => {
     const [query, setQuery] = useState('')
     const [suggestions, setSuggestions] = useState(null)
     
     const fetchSuggestions = async () => {
-        const res = await axios.post('/api/public/recipe/menu', {
+        const res = await axios.post('/api/public/get-menu', {
             amount: 12
         })
         .catch(err => console.log(err))
@@ -31,9 +31,15 @@ const SearchBar = () => {
             keyword = suggested
             setQuery(keyword)
         }
-        setQuery('')
-        
-        console.log(keyword)
+
+        axios.post('/api/public/search', {
+            keyword: keyword,
+            amount: 12
+        })
+        .then(res => {
+            setMenuData(res.data.body.results)
+        })
+        .catch(err => setError(err.response.data.message))
     }
 
     useEffect(() => {
