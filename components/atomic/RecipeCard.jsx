@@ -77,6 +77,7 @@ const style = ({mover, child, parent}) => css`
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 0 4px #0005;
+    max-width: 500px;
 
     &:hover p{
         transition: ${!mover ? '0' : child.current.offsetWidth/90}s ease-out;

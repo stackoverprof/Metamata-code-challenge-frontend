@@ -11,7 +11,6 @@ import Etalase from '@components/molecular/Etalase'
 
 const Home = () => {
     const [menuData, setMenuData] = useState(null)
-    // const [state, setstate] = useState(initialState)
     const [error, setError] = useState('')
     const screen = useResize().width
 

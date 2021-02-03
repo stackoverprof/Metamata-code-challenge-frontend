@@ -6,6 +6,7 @@ import axios from 'axios'
 const SearchBar = ({setMenuData, setError}) => {
     const [query, setQuery] = useState('')
     const [suggestions, setSuggestions] = useState(null)
+    const [totalResults, setTotalResults] = useState(null)
     
     const fetchSuggestions = async () => {
         const res = await axios.post('/api/public/get-menu', {
@@ -38,6 +39,7 @@ const SearchBar = ({setMenuData, setError}) => {
         })
         .then(res => {
             setMenuData(res.data.body.results)
+            setTotalResults(res.data.body.totalResults)
         })
         .catch(err => setError(err.response.data.message))
     }
@@ -47,7 +49,7 @@ const SearchBar = ({setMenuData, setError}) => {
     }, [])
     
     return (
-        <section css={style} className="flex -cc">
+        <section css={style} className="flex -cc -col">
             <div className="contain-size--m flex -cc">
                 <div className="inner flex -cc"> 
                     <form onSubmit={handleSearch} className="flex -cc">
@@ -58,6 +60,7 @@ const SearchBar = ({setMenuData, setError}) => {
                     </form>
                 </div>
             </div>
+            {totalResults !== null && <p className="header">Sebanyak {totalResults} resep ditemukan</p>}
         </section>
     )
 }
@@ -89,6 +92,15 @@ const InputAnimated = ({placeholder, query, setQuery}) => {
 
 const style = css`
     margin: 24px;
+
+    p.header{
+        font-family: Raleway;
+        font-size: 16px;
+        text-align: center;
+        
+        color: black;
+        margin: 24px;
+    }
 
     .animated{
         width: 100%;
