@@ -8,7 +8,7 @@ const AuthLinks = () => {
     const { authState } = useAuth()
 
     return (
-        <div css={style}>
+        <div css={style} className="flex -cc -col>
             <Link href={to.saved}><button className="btn">Lihat Resep Tersimpan</button></Link>
             { authState === 'guest' && <Link href={to.login}><button className="btn">Login</button></Link> }
             { authState === 'guest' && <Link href={to.register}><button className="btn">Register</button></Link> }
