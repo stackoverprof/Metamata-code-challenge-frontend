@@ -31,7 +31,7 @@ const Dashboard = () => {
             {currentUser && (
                 <MainLayout style={style}>
                     <p>Dashboard of {currentUser.displayName}</p>
-                    <div>
+                    <div className="control">
                         <img src={currentUser.photoURL} alt=""/>
                         <Link href={to.home}><button className="btn">Back Home</button></Link>
                         <button className="btn red" onClick={authMethods.handleSignout}>LOGOUT</button>
@@ -54,6 +54,20 @@ const style = css`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    form{
+        margin-top: 24px;
+    }
+
+    @media (max-width: 580px) {
+        
+        .control, form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    }
 
     .alert-box{
         position: fixed;
