@@ -10,6 +10,7 @@ const AuthLinks = () => {
     return (
         <div css={style} className="flex -cc -col">
             <Link href={to.saved}><button className="btn saved-btn">Lihat Resep Tersimpan</button></Link>
+            <br/>
             <div className="flex -cc">
                 { authState === 'guest' && <Link href={to.login}><button className="btn">Login</button></Link> }
                 { authState === 'guest' && <Link href={to.register}><button className="btn">Register</button></Link> }
@@ -21,10 +22,7 @@ const AuthLinks = () => {
 
 const style = css`
     margin-top: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+    
     .saved-btn{
         margin-bottom: 24px;
     }
