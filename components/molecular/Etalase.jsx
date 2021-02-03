@@ -3,12 +3,12 @@ import { css } from '@emotion/react'
 import RecipeCard from '@components/atomic/RecipeCard'
 import useResize from 'use-resizing'
 
-const Etalase = ({data}) => {
+const Etalase = ({header, data}) => {
     const screen = useResize().width
 
     return (
         <section css={style} className="flex -cc -col">
-            <p className="header">Hasil Pencarian Resep</p>
+            <p className="header">{header}</p>
             <div className={`contain-size--m ${screen <= 616 ? 'maw-300' : ''} ${data && data.length === 1 ? 'maw-300' :''} ${data && data.length === 2 ? 'maw-600' :''}`}>
                 <div className="gridder">
                     {data?.map((item) => (

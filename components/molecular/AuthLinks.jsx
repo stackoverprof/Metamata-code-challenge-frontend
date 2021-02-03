@@ -9,6 +9,7 @@ const AuthLinks = () => {
 
     return (
         <div css={style}>
+            <Link href={to.saved}><button className="btn">Lihat Resep Tersimpan</button></Link>
             { authState === 'guest' && <Link href={to.login}><button className="btn">Login</button></Link> }
             { authState === 'guest' && <Link href={to.register}><button className="btn">Register</button></Link> }
             { authState === 'user' && <Link href={to.dashboard}><button className="btn">Dashboard</button></Link> }

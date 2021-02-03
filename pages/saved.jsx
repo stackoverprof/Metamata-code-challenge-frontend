@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/react'
 import useResize from 'use-resizing'
-import axios from 'axios'
+import Link from 'next/link'
 
+import to from '@core/routepath'
 import HomeLayout from '@components/layouts/HomeLayout'
-import Hero from '@components/molecular/Hero'
-import SearchBar from '@components/molecular/SearchBar'
-import AuthLinks from '@components/molecular/AuthLinks'
 import Etalase from '@components/molecular/Etalase'
 
 const Home = () => {
@@ -14,21 +12,17 @@ const Home = () => {
     const [error, setError] = useState('')
     const screen = useResize().width
 
-    const fetchMenu = () => {
-        axios.post('/api/public/get-menu', { amount: 12 })
-        .then(res => setMenuData(res.data.body))
-        .catch(err => setError(err.response.data.message))
-    }
 
-    useEffect(fetchMenu, [])
+    useEffect(() => {
+        setMenuData(JSON.parse(localStorage.getItem('fullDataSave')))
+    }, [])
 
     return (
         <HomeLayout style={style({screen})} className="flex -cc -col">
-            <Hero />
-            <SearchBar setMenuData={setMenuData} setError={setError}/>
-            <Etalase header="Hasil Pencarian Resep" data={menuData} error={error}/>
-            <AuthLinks />
-
+            <Etalase header="Resep tersimpan" data={menuData} error={error}/>
+            <div className="flex -cc">
+                <Link href={to.home}><button className="btn">Kembali</button></Link>
+            </div>
             { error && <AlertHandler message={error} closeHandler={() => setError('')} color="red"/>}
         </HomeLayout>
     )

@@ -4,7 +4,8 @@ const RoutePath = {
     home: '/',
     dashboard: '/dashboard',
     login: '/login',
-    register: '/register'
+    register: '/register',
+    saved: '/saved'
 }
 
 export default RoutePath
