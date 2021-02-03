@@ -7,6 +7,7 @@ import GuestOnlyRoute from '@core/routeblocks/GuestOnlyRoute'
 
 import MainLayout from '@components/layouts/MainLayout'
 import GoogleAuth from '@components/atomic/GoogleAuth'
+import AlertHandler from '@components/atomic/AlertHandler'
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -28,7 +29,6 @@ const Login = () => {
     return (
         <GuestOnlyRoute redirect={to.dashboard}>
             <MainLayout style={style}>
-                {errorCode !== '' && <p className="error-message">{errorCode}</p>}
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="email">EMAIL</label>
@@ -48,6 +48,8 @@ const Login = () => {
                     |
                     <Link href={to.home}>Back Home</Link>
                 </div>
+
+                {errorCode && <AlertHandler message={errorCode} closeHandler={() => setErrorCode('')} color="red" />}
             </MainLayout>
         </GuestOnlyRoute>
     )

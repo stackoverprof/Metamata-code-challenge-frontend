@@ -4,6 +4,7 @@ import Link from 'next/link'
 import to from '@core/routepath'
 import { useAuth } from '@core/contexts/AuthContext'
 import GuestOnlyRoute from '@core/routeblocks/GuestOnlyRoute'
+import AlertHandler from '@components/atomic/AlertHandler'
 
 import MainLayout from '@components/layouts/MainLayout'
 import GoogleAuth from '@components/atomic/GoogleAuth'
@@ -34,7 +35,6 @@ const Register = () => {
     return (
         <GuestOnlyRoute redirect={to.dashboard}>
             <MainLayout style={style}>
-                {errorCode !== '' && <p className="error-message">{errorCode}</p>}
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="diplay-name">NAMA</label>
@@ -62,6 +62,8 @@ const Register = () => {
                     |
                     <Link href={to.home}>Back Home</Link>
                 </div>
+
+                {errorCode && <AlertHandler message={errorCode} closeHandler={() => setErrorCode('')} color="red" />}
             </MainLayout>
         </GuestOnlyRoute>
     )
