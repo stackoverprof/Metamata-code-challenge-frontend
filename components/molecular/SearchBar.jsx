@@ -61,6 +61,7 @@ const SearchBar = ({setMenuData, setError}) => {
                 </div>
             </div>
             {totalResults !== null && <p className="header">Sebanyak {totalResults} resep ditemukan</p>}
+            {totalResults === 0 && <p className="header">Lakukan pencarian dalam bahasa inggris</p>}
         </section>
     )
 }
