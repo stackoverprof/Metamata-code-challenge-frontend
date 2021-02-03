@@ -5,6 +5,7 @@ import AlertHandler from '@components/atomic/AlertHandler'
 const RecipeCard = ({data}) => {
     const [mover, setMover] = useState(false)
     const [error, setError] = useState('')
+    const [saved, setSaved] = useState(false)
     const child = useRef(null)
     const parent = useRef(null)
 
@@ -31,6 +32,7 @@ const RecipeCard = ({data}) => {
                 localStorage.setItem('savedRecipes', stringify(fetch))
 
             fullDataSave()
+            setSaved(true)
         } else {
             console.log('dah kesimpen dulu');
             setError('This item has already been saved')
@@ -62,7 +64,7 @@ const RecipeCard = ({data}) => {
                     <p className="flex -cc" ref={child}>{data.title}</p>
                 </div>
                 <div className="btn-container flex -cc">
-                    <button onClick={handleFavorite} className="btn-green">favorit</button>
+                    <button onClick={handleFavorite} className={`btn-green ${saved ? 'btn-saved' : ''}`}>{saved ? 'saved' : 'favorit'}</button>
                 </div>
             </div>
             { error && <AlertHandler message={error} closeHandler={() => setError('')} color="red"/>}
@@ -78,6 +80,12 @@ const style = ({mover, child, parent}) => css`
     overflow: hidden;
     box-shadow: 0 0 4px #0005;
     max-width: 500px;
+
+    .btn-saved{
+        background: #3A3C42 !important;
+        border: 1px solid #9CCD62 !important;
+        color: #9CCD62 !important;
+    }
 
     &:hover p{
         transition: ${!mover ? '0' : child.current.offsetWidth/90}s ease-out;
