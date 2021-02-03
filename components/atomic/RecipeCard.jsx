@@ -110,6 +110,15 @@ const style = ({mover, child, parent}) => css`
                 color: black;
                 font-weight: bold;
                 margin: 0;
+
+                &:hover{  
+                    background: #7ca14e;
+                    color: white;
+                }
+                &:focus{  
+                    background: #6a8845;
+                    color: white;
+                }
             }
         }
 
