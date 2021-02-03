@@ -47,6 +47,11 @@ const SearchBar = ({setMenuData, setError, fetchMenu, menuData, error}) => {
         .catch(err => setError(err.response.data.message))
     }
 
+    const closeSearch = () => {
+        fetchMenu()
+        setTotalResults(null)
+    }
+
     useEffect(() => {
         fetchSuggestions()
     }, [])
@@ -67,7 +72,7 @@ const SearchBar = ({setMenuData, setError, fetchMenu, menuData, error}) => {
             {totalResults !== null && (
                 <div className="subheader flex -cc">
                     <p className="header">Sebanyak {totalResults} resep ditemukan</p>
-                    <button onClick={fetchMenu}>tutup pencarian <AiFillCloseCircle /></button>
+                    <button onClick={closeSearch}>tutup pencarian <AiFillCloseCircle /></button>
                 </div>
             )}
             {totalResults === 0 && <p className="header">Lakukan pencarian dalam bahasa inggris</p>}
