@@ -7,7 +7,7 @@ import HomeLayout from '@components/layouts/HomeLayout'
 import Hero from '@components/molecular/Hero'
 import SearchBar from '@components/molecular/SearchBar'
 import AuthLinks from '@components/molecular/AuthLinks'
-import Etalase from '@components/molecular/Etalase'
+import AlertHandler from '@components/atomic/AlertHandler'
 
 const Home = () => {
     const [menuData, setMenuData] = useState(null)
@@ -25,8 +25,7 @@ const Home = () => {
     return (
         <HomeLayout style={style({screen})} className="flex -cc -col">
             <Hero />
-            <SearchBar setMenuData={setMenuData} setError={setError}/>
-            <Etalase header="Hasil Pencarian Resep" data={menuData} error={error}/>
+            <SearchBar setMenuData={setMenuData} setError={setError} fetchMenu={fetchMenu} menuData={menuData} error={error}/>
             <AuthLinks />
 
             { error && <AlertHandler message={error} closeHandler={() => setError('')} color="red"/>}

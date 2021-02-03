@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/react'
 import TypeIt from "typeit-react"
 import axios from 'axios'
+import { AiFillCloseCircle } from 'react-icons/ai'
 
-const SearchBar = ({setMenuData, setError}) => {
+import Etalase from '@components/molecular/Etalase'
+
+const SearchBar = ({setMenuData, setError, fetchMenu, menuData, error}) => {
     const [query, setQuery] = useState('')
     const [suggestions, setSuggestions] = useState(null)
     const [totalResults, setTotalResults] = useState(null)
@@ -49,26 +52,42 @@ const SearchBar = ({setMenuData, setError}) => {
     }, [])
     
     return (
+        <>
         <section css={style} className="flex -cc -col">
             <div className="contain-size--m flex -cc">
                 <div className="inner flex -cc"> 
                     <form onSubmit={handleSearch} className="flex -cc">
-                        <InputAnimated placeholder={suggestions} query={query} setQuery={setQuery}/>
+                        <InputAnimated placeholder={suggestions} query={query} setQuery={setQuery} fetchMenu={fetchMenu} setTotalResults={setTotalResults}/>
                         <div className="btn-container flex -cc">
                             <button className="btn-green" type="submit">Cari</button>
                         </div>
                     </form>
                 </div>
             </div>
-            {totalResults !== null && <p className="header">Sebanyak {totalResults} resep ditemukan</p>}
+            {totalResults !== null && (
+                <div className="subheader flex -cc">
+                    <p className="header">Sebanyak {totalResults} resep ditemukan</p>
+                    <button onClick={fetchMenu}>tutup pencarian <AiFillCloseCircle /></button>
+                </div>
+            )}
             {totalResults === 0 && <p className="header">Lakukan pencarian dalam bahasa inggris</p>}
         </section>
+        <Etalase header={totalResults ? 'Hasil Pencarian Resep' : 'Rekomendasi Resep Kami' } data={menuData} error={error}/> 
+        </>
     )
 }
 
-const InputAnimated = ({placeholder, query, setQuery}) => {
+const InputAnimated = ({placeholder, query, setQuery, fetchMenu, setTotalResults}) => {
     const [focused, setFocused] = useState(false)
-    
+
+    const handleChange = e => {
+        if (e.target.value === '') {
+            fetchMenu()
+            setTotalResults(null)
+        }
+        setQuery(e.target.value)
+    }
+
     const setting = {
         strings: placeholder,
         speed: 100,
@@ -82,7 +101,7 @@ const InputAnimated = ({placeholder, query, setQuery}) => {
 
     return (
         <div className="animated">
-            <input type="text" value={query} onChange={e => setQuery(e.target.value)} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}/>
+            <input type="text" value={query} onChange={handleChange} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}/>
             <div className="placeholder flex -sc" style={{opacity: focused ? 0 : 1}}>
                 {placeholder && !query && <TypeIt options={setting} element={'label'} id="suggested" className="noselect"/>}
             </div>
@@ -101,6 +120,15 @@ const style = css`
         
         color: black;
         margin: 24px;
+    }
+
+    .subheader{
+        button{
+            padding: 4px 12px;
+            background: #ddd;
+            border: none;
+            border-radius: 12px;
+        }
     }
 
     .animated{

@@ -7,7 +7,7 @@ export default async (req, res) => {
     const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?query=${keyword}&number=${amount}&apiKey=${apiKey}`
     
     const { data } = await axios.get(apiUrl)
-      .catch(() => res.status(500).json({status: 'OK', message: 'Spoonacular api error'}))
+      .catch(() => res.status(200).json({status: 'ERROR', message: 'Spoonacular api error', body : { results : [], totalResults: 0}}))
 
     console.log(`searched : ${keyword}`)
 

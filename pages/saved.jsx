@@ -6,6 +6,7 @@ import Link from 'next/link'
 import to from '@core/routepath'
 import HomeLayout from '@components/layouts/HomeLayout'
 import Etalase from '@components/molecular/Etalase'
+import AlertHandler from '@components/atomic/AlertHandler'
 
 const Home = () => {
     const [menuData, setMenuData] = useState(null)
