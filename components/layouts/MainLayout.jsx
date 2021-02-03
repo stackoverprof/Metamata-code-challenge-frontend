@@ -22,6 +22,7 @@ const HomeLayout = ({style, children}) => {
 
 const layer = ({navHeight}) => css`
     padding-top: ${navHeight}px;
+    padding-bottom: 54px;
 `
 
 export default HomeLayout
