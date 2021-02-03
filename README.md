@@ -2,6 +2,26 @@
 
 Membuat Website resep makanan;
 
+## R.Bintang Bagus Putra Angkasa
+
+kunjungi - [Link Deploy](https://metamata.errbint.net) metamata.errbint.net
+
+atau
+
+cara run : install nodejs, lalu jalankan command
+```
+npm i
+npm run dev
+```
+
+
+![](https://img.shields.io/badge/JAVASCRIPT%20-%23323330.svg?&style=flat&logo=javascript&logoColor=F0DB4F) 
+![](https://img.shields.io/badge/REACT%20-%232DB2D4.svg?&style=flat&logo=react&logoColor=white) 
+![](https://img.shields.io/badge/NEXT%20-%23000000.svg?&style=flat&logo=next.js&logoColor=white) 
+![](https://img.shields.io/badge/FIREBASE%20-%23FFA611.svg?&style=flat&logo=firebase&logoColor=white) 
+![](https://img.shields.io/badge/NODE%20-%233C873A.svg?&style=flat&logo=node.js&logoColor=white)
+
+
 ## Spesifikasi
 - Membuat tampilan sesuai contoh desain
 - Tampilan responsive baik di Desktop, Tablet, atau Mobile
